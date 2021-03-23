@@ -10,11 +10,13 @@ public class Tilemapground : MonoBehaviour
 {
     public List<Tile> grassTest;
     public Tilemap groundTileMap;
-    public int fieldSize;
+    public int fieldSizeSlider;
+    public static int fieldSize;
     private static readonly Random random = new Random(); 
     private static readonly object syncLock = new object(); 
     private void Awake()
     {
+        fieldSize = fieldSizeSlider;
         int iii = fieldSize;
         for (int i = 0; i <= fieldSize; i++)
         {

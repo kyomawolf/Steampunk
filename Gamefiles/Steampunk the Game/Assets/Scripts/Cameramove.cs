@@ -8,10 +8,14 @@ public class Cameramove : MonoBehaviour
     public float mainSpeed = 90.0f; //regular speed
     private float totalRun= 1.0f;
     public Camera Cam;
-
+    public int camTransform;
     private void Start()
     {
         Cam.orthographicSize = 5;
+
+        camTransform = Tilemapground.fieldSize;
+        Vector3 pe = new Vector3(0, (float) (camTransform * 0.25), 0);
+        transform.Translate(pe);
     }
 
     void Update () {
