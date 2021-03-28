@@ -10,6 +10,7 @@ public class Tilemapground : MonoBehaviour
 {
     public List<Tile> grassTest;
     public Tilemap groundTileMap;
+    public Tilemap miniMap;
     public int fieldSizeSlider;
     public static int fieldSize;
     private static readonly Random random = new Random(); 
@@ -24,7 +25,8 @@ public class Tilemapground : MonoBehaviour
             {
                 for (int y = fieldSize / 2 - i; y <= fieldSize / 2 + i; y++)
                 {
-                    groundTileMap.SetTile(new Vector3Int(i, y, 0), grassTest[NumberGenerator(0, 4)]);
+                    groundTileMap.SetTile(new Vector3Int(i, y, 0), grassTest[GrassGroundHandler()]);
+                    miniMap.SetTile(new Vector3Int(i, y, 0), grassTest[0]);
                 }
             }
             else
@@ -32,14 +34,31 @@ public class Tilemapground : MonoBehaviour
                 iii--;
                     for (int ii = iii; ii >= fieldSize - iii; ii--)
                     {
-                        groundTileMap.SetTile(new Vector3Int(i, ii, 0), grassTest[NumberGenerator(0, 4)]);
+                        groundTileMap.SetTile(new Vector3Int(i, ii, 0), grassTest[GrassGroundHandler()]);
+                        miniMap.SetTile(new Vector3Int(i, ii, 0), grassTest[0]);
                     } 
             }
         }
     }
- 
 
-    public static int NumberGenerator(int min, int max)
+
+    public int GrassGroundHandler()
+    {
+        int i;
+        lock (syncLock)
+        {
+            i = random.Next(0, 20);
+        }
+
+        if (i <= 18)
+        {
+            return NumberGenerator(1, 5);
+        }
+            return NumberGenerator(5, 12);
+
+    }
+
+    public int NumberGenerator(int min, int max)
     {
         lock(syncLock) { // synchronize
             return random.Next(min, max);
