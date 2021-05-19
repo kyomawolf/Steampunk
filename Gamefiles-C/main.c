@@ -10,7 +10,7 @@ int main(void)
     /* When (->) own GameLoop in function
      * When (__x__) Files (type (x)) loaded
      *
-     * __settings__
+     * load(__settings__)
      *
      * InitWindow(FULLSCREEN)
      *
@@ -28,4 +28,5 @@ int main(void)
      *      Units
      *
      */
+
 }
