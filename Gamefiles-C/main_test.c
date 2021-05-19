@@ -1,88 +1,60 @@
 #include "raylib.h"
-//#include <stdio.h>
+#include "windowsray.h"
+#include <stdio.h>
+#include <stdbool.h>
 
-#define MAX_FRAME_SPEED     15
-#define MIN_FRAME_SPEED      1
+int  DrawIcon(Color iconcolor, Texture2D Icon, Vector2 mid);
 
 int main(void)
 {
-    // Initialization
-    //--------------------------------------------------------------------------------------
-    const int screenWidth = 800;
-    const int screenHeight = 450;
+    int secondcounter = 60;
+    int frames = 10;
+    int curr_frame = 0;
+    int framecounter = 0;
+    bool iconshow = true;
+    bool firstframe = true;
+    Color iconcolor = {255, 255, 255, 255};
 
-    InitWindow(screenWidth, screenHeight, "raylib [texture] example - texture rectangle");
+    InitWindow(GetScreenWidth(), GetScreenHeight(), "STEAMPUNK_GAME_TEST_V0.00.00.01");
 
-    // NOTE: Textures MUST be loaded after Window initialization (OpenGL context is required)
-    Texture2D scarfy = LoadTexture("resources/scarfy.png");        // Texture loading
+    int screenwidth = GetScreenWidth();
+    int screenheight = GetScreenHeight();
 
-    Vector2 position = { 350.0f, 280.0f };
-    Rectangle frameRec = { 0.0f, 0.0f, (float)scarfy.width/6, (float)scarfy.height };
-    int currentFrame = 0;
+    Texture2D unit_one = LoadTexture("../resources/Grass.png");
+    Texture2D Icon = LoadTexture("../resources/GameIcon.png");
 
-    int framesCounter = 0;
-    int framesSpeed = 8;            // Number of spritesheet frames shown by second
+    Vector2 mid = {(float)screenwidth / 2, (float)screenheight / 2};
 
-    SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
-    //--------------------------------------------------------------------------------------
-
-    // Main game loop
-    while (!WindowShouldClose())    // Detect window close button or ESC key
+    Rectangle unit_one_frame = {0.0f, 0.0f, (float)unit_one.width / 2,(float)unit_one.height / 6};
+    SetTargetFPS(60);
+    //starting Game
+    ClearBackground(RAYWHITE);
+    DrawIcon(iconcolor, Icon, mid);
+    //Main Gameloop
+    while(!WindowShouldClose())
     {
-        // Update
-        //----------------------------------------------------------------------------------
-        framesCounter++;
-
-        if (framesCounter >= (60/framesSpeed))
-        {
-            framesCounter = 0;
-            currentFrame++;
-
-            if (currentFrame > 5) currentFrame = 0;
-
-            frameRec.x = (float)currentFrame*(float)scarfy.width/6;
+        if (secondcounter != 60) {
+            secondcounter++;
+            continue;
         }
-
-        if (IsKeyPressed(KEY_RIGHT)) framesSpeed++;
-        else if (IsKeyPressed(KEY_LEFT)) framesSpeed--;
-
-        if (framesSpeed > MAX_FRAME_SPEED) framesSpeed = MAX_FRAME_SPEED;
-        else if (framesSpeed < MIN_FRAME_SPEED) framesSpeed = MIN_FRAME_SPEED;
-        //----------------------------------------------------------------------------------
-
-        // Draw
-        //----------------------------------------------------------------------------------
         BeginDrawing();
-
         ClearBackground(RAYWHITE);
-
-        DrawTexture(scarfy, 15, 40, WHITE);
-        DrawRectangleLines(15, 40, scarfy.width, scarfy.height, LIME);
-        DrawRectangleLines(15 + (int)frameRec.x, 40 + (int)frameRec.y, (int)frameRec.width, (int)frameRec.height, RED);
-
-        DrawText("FRAME SPEED: ", 165, 210, 10, DARKGRAY);
-        DrawText(TextFormat("%02i FPS", framesSpeed), 575, 210, 10, DARKGRAY);
-        DrawText("PRESS RIGHT/LEFT KEYS to CHANGE SPEED!", 290, 240, 10, DARKGRAY);
-
-        for (int i = 0; i < MAX_FRAME_SPEED; i++)
-        {
-            if (i < framesSpeed) DrawRectangle(250 + 21*i, 205, 20, 20, RED);
-            DrawRectangleLines(250 + 21*i, 205, 20, 20, MAROON);
-        }
-
-        DrawTextureRec(scarfy, frameRec, position, WHITE);  // Draw part of the texture
-
-        DrawText("(c) Scarfy sprite by Eiden Marsal", screenWidth - 200, screenHeight - 20, 10, GRAY);
-
+        if (curr_frame > 10)
+            curr_frame = 0;
+        if (curr_frame % 2 == 1)
+            unit_one_frame.x = 1 * (float)unit_one.width / 2;
+        else
+            unit_one_frame.x = 0 * (float)unit_one.width / 2;
+        unit_one_frame.y = (curr_frame / 2) * (float)unit_one.height;
+        DrawTextureRec(unit_one, unit_one_frame, mid, WHITE);
         EndDrawing();
-        //----------------------------------------------------------------------------------
+        curr_frame++;
+        secondcounter = 0;
+
     }
+    UnloadTexture(unit_one);
+    UnloadTexture(Icon);
+    CloseWindow();
 
-    // De-Initialization
-    //--------------------------------------------------------------------------------------
-    UnloadTexture(scarfy);       // Texture unloading
-
-    CloseWindow();                // Close window and OpenGL context
-    //--------------------------------------------------------------------------------------
     return 0;
 }

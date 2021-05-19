@@ -28,10 +28,8 @@ if (NOT raylib_FOUND) # If there's none, fetch and build raylib
 
 endif()
 
-
-
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(steampunk_game_C_test main_test.c)
+add_executable(steampunk_game_C_test main_test.c DrawIconOpening.c)
 
 target_link_libraries(steampunk_game_C_test raylib)
