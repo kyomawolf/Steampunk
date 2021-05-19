@@ -1,0 +1,39 @@
+!! WARNING NOT FUNCTIONALLY FILE !! ONLY AS CONCEPT !!
+
+game field is saved like this:
+
+0200                                                3                           0 2
+ ^                                                  ^                           ^ ^----------------------------------,
+field size, squared so only one number needed | number of maximum player | first digit for the player himself , second number  for the base placement on the field (important because of the building permissions on the map
+so together:
+0300|3|00|12|23|31\n
+0300300122331\n
+
+all textures are already loaded, so we only check which texture gets where;
+
+00{             10001000\n05000321}
+^                   ^
+texture_ID |x,y coordinates; separated by '\n'
+example
+00\n
+{\n
+10001000\n
+05000321\n
+05390673\n
+...\n
+}\n
+01\n
+{\n
+...\n
+}\n
+
+the newlines are for readability and better modding possibilities
+
+every line one unit/building, starting with the main-players units:
+0           01     100                    04                10001000                                0||1                                                   01             10000                                 10001000                    10001000
+^            ^      ^                      ^                    ^                                     ^                                                     ^               ^                                       ^
+Player | Unit_ID | Health of unit | Frame of animation | x,y position on game board (4 digit) | is on idle, if yes (1) proceed to the next line (\n) | what action | unit_NUM of attacked/followed unit | x,y location of action (if attack move on unit move to x,y)
+
+so together:
+0|23|093|10000100|1|00|00120|02010|01000\n
+02309310000100100001200201001000\n
