@@ -52,7 +52,7 @@ int main(void)
 
             frameRec.x = (float)currentFrame*(float)scarfy.width/6;
         }
-        SetLoadFileDataCallback()
+        SetLoadFileDataCallback(NULL)
         if (IsKeyDown(KEY_RIGHT)) framesSpeed++;
         else if (IsKeyDown(KEY_LEFT)) framesSpeed--;
 

@@ -5,7 +5,7 @@
 #include "raylib.h"         //rayPlayAudio
 #include "windowsray.h"
 
-int main(void)
+int	main(void)
 {
     /* When (->) own GameLoop in function
      * When (__x__) Files (type (x)) loaded
@@ -28,5 +28,4 @@ int main(void)
      *      Units
      *
      */
-
 }
