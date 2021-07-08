@@ -2,7 +2,7 @@
 // Created by Werwolf2 on 19.05.2021.
 //
 
-#include "raylib.h"         //rayPlayAudio
+#include <raylib.h>       //rayPlayAudio
 #include "windowsray.h"
 
 int main(void)

@@ -4,7 +4,7 @@
 
 #include <stdbool.h>
 #include "windowsray.h"
-#include "raylib.h"
+#include <raylib.h>
 //#include <stdio.h>
 
 #define MAX_FRAME_SPEED     15

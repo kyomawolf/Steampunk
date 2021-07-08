@@ -1,14 +1,14 @@
 //
 // Created by Werwolf2 on 14.05.2021.
 //
-#include "raylib.h"
+#include <raylib.h>
 #include "windowsray.h"
 
 int DrawIcon(Color iconcolor, Texture2D Icon, Vector2 mid)
 {
-    Sleep(1000);
+    Sleep(10);
 
-    while (!IsKeyPressed(MOUSE_BUTTON_LEFT))
+    while (1)
     {
         if (iconcolor.a < 10)
             break;
