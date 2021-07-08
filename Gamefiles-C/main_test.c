@@ -1,4 +1,4 @@
-#include "raylib.h"
+#include <raylib.h>
 #include "windowsray.h"
 #include <stdio.h>
 #include <stdbool.h>
@@ -31,7 +31,7 @@ int main(void)
     ClearBackground(RAYWHITE);
     DrawIcon(iconcolor, Icon, mid);
     //Main Gameloop
-    while(!WindowShouldClose())
+    while(!WindowShouldClose()) //try while (1)\n{do}
     {
         if (secondcounter != 60) {
             secondcounter++;
