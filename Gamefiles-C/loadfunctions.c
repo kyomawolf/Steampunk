@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <raylib.h>
 
-player *load_player(float initlist[13], int ID)
+player *load_player(float initlist[13], int ID)		// inits A player with a given ID // RETURNS null || Player
 {
 	player *p;
     p = malloc(sizeof(player));
@@ -29,52 +29,26 @@ player *load_player(float initlist[13], int ID)
     p->foodcon = 0;
     return (p);
 }
-unit *load_unit(int ID, int uID)
+
+unit *load_unit(int ID, int uID)		// inits unit with a given player-ID and a Unit-ID // RETURNS null || Unit
 {
     unit *u;
+
     u = malloc(sizeof(unit));
     if (u == NULL)
         return (NULL);
 	u->dead = false;
-    switch (uID)
+	switch (uID)						// sets startvalues
+	{
+		default:
+		break;
+	}
+    switch (uID)						// checks for Airunit
     {
-        case 0:
+        case 0 ... 9:
 			u->isair = false;
             return (u);
-        case 1:
-			u->isair = false;
-            return (u);
-        case 3:
-			u->isair = false;
-            return (u);
-        case 4:
-			u->isair = false;
-            return (u);
-        case 5:
-			u->isair = false;
-            return (u);
-        case 6:
-			u->isair = false;
-            return (u);
-        case 7:	
-			u->isair = false;
-        	return (u);
-        case 8:
-			u->isair = false;
-        	return (u);
-        case 9:
-			u->isair = false;
-            return (u);
-        case 10:
-            u->isair = true;
-            return (u);
-        case 11:
-            u->isair = true;
-            return (u);
-        case 12:
-            u->isair = true;
-            return (u);
-        case 13:
+        case 10 ... 13:
             u->isair = true;
             return (u);
         default:
@@ -82,3 +56,4 @@ unit *load_unit(int ID, int uID)
         	return (NULL);
     }
 }
+
