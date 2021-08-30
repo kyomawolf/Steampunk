@@ -13,7 +13,7 @@ int main(void)
      * load(__settings__)
      *
      * InitWindow(FULLSCREEN)
-     *
+     *	
      * PlayIntro(RaylibIcon, JKAIcon, (42?))
      *
      *
